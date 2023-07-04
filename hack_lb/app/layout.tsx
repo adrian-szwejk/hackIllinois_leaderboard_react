@@ -14,7 +14,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
+      {/* This is to help with extensions blocking getting API */}
       <body className={'${inter.className} bg-slate-800 text-slate-100 container mx-auto p-4'}>{children}</body>
     </html>
   )
