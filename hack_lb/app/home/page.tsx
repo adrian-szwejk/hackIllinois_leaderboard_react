@@ -4,16 +4,16 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-    const apiUrl = 'https://jsonplaceholder.typicode.com/todos'
+    const apiUrl = 'https://api.hackillinois.org/profile/leaderboard/?limit=10'
   // HackIllinois API Link https://api.hackillinois.org/profile/leaderboard/
     const [users, setUsers] = useState([]);
     let displayData
     function getData() {
       fetch(apiUrl).then((response) => response.json()).then((responseData) => {
         
-        displayData = responseData.map(function(user:any){
+        displayData = responseData['profiles'].map(function(user:any){
           return (
-            <p key = {user.id}>{user.title}</p>
+            <p key = {user.id}>{user.discord}</p>
           )
         })
         console.log(responseData)
@@ -24,7 +24,7 @@ export default function Home() {
     
     getData();
   },[])
-  //You put the array after the function to make it run one "first mount" or when it first launches
+  //You put the array after the useEffect function to make it run one "first mount" or when it first launches
   return (
     <div>
       <h1 className = "text-4xl">Leaderboard</h1>
